@@ -310,7 +310,7 @@ public class ShibbolethSSOFilter extends AbstractAuthenticationProcessingFilter 
             SecurityContextHolder.clearContext();
             httpAuthenticator.logoff(request, response);
          } catch (Exception e) {
-            logger.error("Could not logout SSO user from Crowd", e);
+            log.error("Could not logout SSO user from Crowd", e);
             return true;
          }
          return !StringUtils.isBlank(username);
@@ -422,7 +422,7 @@ public class ShibbolethSSOFilter extends AbstractAuthenticationProcessingFilter 
                httpAuthenticator.setPrincipalToken(request, response, authResult.getCredentials().toString());
             } catch (Exception e) {
                // occurs if application's auth token expires while trying to look up the domain property from the Crowd server
-               logger.error("Unable to set Crowd SSO token", e);
+               log.error("Unable to set Crowd SSO token", e);
             }
          }
       }
