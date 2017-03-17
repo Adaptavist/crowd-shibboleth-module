@@ -173,9 +173,9 @@ public class ShibbolethSSOFilter extends AbstractAuthenticationProcessingFilter 
 
       if (userDetails == null) {
          log.debug("No user {} found. Creating", username);
-         String firstName = request.getHeader(config.getFirstNameHeader());
-         String lastName = request.getHeader(config.getLastNameHeader());
-         String email = request.getHeader(config.getEmailHeader());
+         String firstName = (String) request.getAttribute(config.getFirstNameHeader());
+         String lastName = (String) request.getAttribute(config.getLastNameHeader());
+         String email = (String) request.getAttribute(config.getEmailHeader());
 
          if (config.isLatin1ToUTF8()) {
             firstName = StringUtil.latin1ToUTF8(firstName);
@@ -440,9 +440,9 @@ public class ShibbolethSSOFilter extends AbstractAuthenticationProcessingFilter 
       try {
          User foundUser = directoryManager.findUserByName(directory.getId(), username);
          UserTemplate mutableUser = new UserTemplate(foundUser);
-         String firstName = request.getHeader(config.getFirstNameHeader());
-         String lastName = request.getHeader(config.getLastNameHeader());
-         String email = request.getHeader(config.getEmailHeader());
+         String firstName = (String) request.getAttribute(config.getFirstNameHeader());
+         String lastName = (String) request.getAttribute(config.getLastNameHeader());
+         String email = (String) request.getAttribute(config.getEmailHeader());
 
          // Convert first name and last name from latin1 to utf8
          if (config.isLatin1ToUTF8()) {
